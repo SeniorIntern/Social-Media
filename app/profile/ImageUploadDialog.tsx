@@ -12,7 +12,7 @@ import {
 import { CACHE_KEY_PLAYER, TOAST_KEY_ANNOUNCE } from '@/constants';
 import apiClient from '@/services/apiClient';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { FormEvent, ReactNode, useCallback, useRef, useState } from 'react';
+import { FormEvent, ReactNode, useCallback, useState } from 'react';
 import { Accept, FileWithPath, useDropzone } from 'react-dropzone';
 import { toast } from 'sonner';
 
@@ -25,7 +25,7 @@ type Props = {
 
 const ImageUploadDialog = ({ title, type, userId, children }: Props) => {
   console.log('mounted');
-  const imageRef = useRef<HTMLInputElement>(null);
+  // const imageRef = useRef<HTMLInputElement>(null);
 
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
 
@@ -60,7 +60,7 @@ const ImageUploadDialog = ({ title, type, userId, children }: Props) => {
   const clearDropZone = () => {
     acceptedFiles.length = 0;
     acceptedFiles.splice(0, acceptedFiles.length);
-    if (imageRef.current) imageRef.current.value = '';
+    // if (imageRef.current) imageRef.current.value = '';
   };
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -73,7 +73,7 @@ const ImageUploadDialog = ({ title, type, userId, children }: Props) => {
         id: TOAST_KEY_ANNOUNCE
       });
     }
-    console.log('file=', acceptedFiles[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const accept: Accept = {
@@ -126,7 +126,7 @@ const ImageUploadDialog = ({ title, type, userId, children }: Props) => {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div {...getRootProps()} className="">
-            <input ref="imageRef" {...getInputProps()} />
+            <input {...getInputProps()} />
             {isDragActive ? (
               <p>Drop the files here ...</p>
             ) : (

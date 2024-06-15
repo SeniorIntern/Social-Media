@@ -48,6 +48,7 @@ const MessageContainer = ({ sender, conversationId }: Props) => {
       socket.off('connect');
       socket.off(conversationId);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chats]);
 
   console.log('mounted');
