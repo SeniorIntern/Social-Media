@@ -23,7 +23,7 @@ const NavOptions = () => {
   ];
 
   return (
-    <div className='px-4'>
+    <div className=''>
       <div className="hidden items-center space-x-12 md:flex">
         <Link href="/">
           <span className="text-3xl font-extrabold">XC</span>

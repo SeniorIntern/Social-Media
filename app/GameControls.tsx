@@ -9,7 +9,7 @@ const GameControls = () => {
   const { pairs } = useGameStore();
 
   return (
-    <div className="lg:fixed lg:top-20 my-4 lg:m-0 w-full">
+    <div className="lg:fixed lg:top-20 my-4 px-8 lg:m-0 w-full">
       <div className="flex items-center justify-between">
         <span className="text-xl font-bold uppercase italic">
           SCORE: {`${pairs.length}/${totalUniqueCards}`}
