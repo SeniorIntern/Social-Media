@@ -46,7 +46,12 @@ export async function login(formData: LoginData) {
     const session = await encrypt({ payload, expires });
 
     // Save the session in a cookie
-    cookies().set('session', session, { expires, httpOnly: true });
+    cookies().set('session', session, {
+      sameSite: 'none',
+      secure: true,
+      expires,
+      httpOnly: true
+    });
     return {
       status: true,
       data: res.data
