@@ -1,4 +1,5 @@
 import { PaginationQuery } from '@/app/types';
+
 import apiClient from './apiClient';
 
 class HttpService<T> {
