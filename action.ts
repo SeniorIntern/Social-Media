@@ -29,7 +29,6 @@ export async function decrypt(input: string): Promise<any> {
 }
 
 export async function login(formData: LoginData) {
-  // Verify credentials && get the user
   let user = {
     email: formData.email,
     password: formData.password
@@ -37,6 +36,8 @@ export async function login(formData: LoginData) {
 
   try {
     const res = await apiClient.post('/auth', user);
+    console.log('res===', res.data);
+    
     // @ts-ignore
     const payload = res.data;
     payload.token = res.headers['x-auth-token'];
