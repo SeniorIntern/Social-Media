@@ -10,7 +10,7 @@ const getProfileImage = (userData: PlayerData | ConversationData): string => {
       userData.data.members,
       userData.userId
     );
-    return member.profileImage;
+    return member?.profileImage;
   } else {
     return userData.data.profileImage;
   }

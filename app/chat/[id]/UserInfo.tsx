@@ -32,7 +32,7 @@ const UserInfo = ({ conversationId }: Props) => {
               src={
                 members.length > 2
                   ? PLACEHOLDER_PROFILE_IMAGE
-                  : members[0].profileImage
+                  : members[0]?.profileImage
               }
               alt="profile image"
               fill
@@ -76,11 +76,11 @@ const UserInfo = ({ conversationId }: Props) => {
             </div>
           ) : (
             <Link
-              href={`/friends/${members[0]._id}`}
+              href={`/friends/${members[0]?._id}`}
               className="inline-flex gap-2"
             >
               <p className="text-xl font-semibold hover:underline">
-                {members[0].username}
+                {members[0]?.username}
               </p>
             </Link>
           )}

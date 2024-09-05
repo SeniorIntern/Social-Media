@@ -22,7 +22,7 @@ const ConversationHeader = ({ userId }: Props) => {
         <Link
           href={
             '/friends/' +
-            getConversationMember(conversation?.members, userId)._id
+            getConversationMember(conversation?.members, userId)?._id
           }
         >
           <div className="flex h-[var(--bar-height)] items-center space-x-2 p-2">
@@ -32,7 +32,7 @@ const ConversationHeader = ({ userId }: Props) => {
                   conversation.members.length > 2
                     ? PLACEHOLDER_PROFILE_IMAGE
                     : getConversationMember(conversation?.members, userId)
-                      .profileImage
+                      ?.profileImage
                 }
                 alt="profile image"
                 fill

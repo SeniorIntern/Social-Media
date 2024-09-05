@@ -37,9 +37,11 @@ export async function login(formData: LoginData) {
   try {
     const res = await apiClient.post('/auth', user);
     console.log('res===', res.data);
-    
+
     // @ts-ignore
     const payload = res.data;
+
+    // TODO: get token from either body or cookie
     payload.token = res.headers['x-auth-token'];
 
     // Create the session
@@ -78,6 +80,7 @@ export async function signup(formData: RegisterData) {
     const res = await apiClient.post('/users', user);
     // @ts-ignore
     const payload = res.data;
+    // TODO: get token from either body or cookie
     payload.token = res.headers['x-auth-token'];
 
     // Create the session
