@@ -1,7 +1,7 @@
 'use client';
 
 import useSocket from '@/app/store/socketStore';
-import { Message } from '@/app/types';
+import { FileWithPreview, Message } from '@/app/types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -28,10 +28,6 @@ import { toast } from 'sonner';
 type Props = {
   sender: string;
   conversationId: string;
-};
-
-type FileWithPreview = File & {
-  preview: string;
 };
 
 const MessageForm = ({ conversationId, sender }: Props) => {
@@ -98,8 +94,6 @@ const MessageForm = ({ conversationId, sender }: Props) => {
     e.preventDefault();
 
     if (messageRef.current?.value.trim() || acceptedFiles.length !== 0) {
-      console.log('acceptedFiles=', acceptedFiles);
-
       const formData = new FormData();
       // Iterate over the acceptedFiles array and append each file to the FormData object
       acceptedFiles.forEach((file) => {
@@ -115,7 +109,6 @@ const MessageForm = ({ conversationId, sender }: Props) => {
       }
 
       try {
-        console.log('formdata===', formData);
         mutation.mutate(formData);
         setFiles([]);
       } catch (err: unknown) {

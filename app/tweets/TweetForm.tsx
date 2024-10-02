@@ -1,6 +1,6 @@
 'use client';
 
-import { Tweet } from '@/app/types';
+import { FileWithPreview, Tweet } from '@/app/types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -19,7 +19,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import EmojiPicker from 'emoji-picker-react';
 import { Image as Img, SmilePlus } from 'lucide-react';
 import Image from 'next/image';
-import { FormEvent, useCallback, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { Accept, useDropzone } from 'react-dropzone';
 import { toast } from 'sonner';
 
@@ -28,14 +28,25 @@ type Props = {
 };
 
 const TweetForm = ({ closeDialog }: Props) => {
+  const [files, setFiles] = useState<FileWithPreview[]>([]);
   const { data: user } = useMe();
   const [tweet, setTweet] = useState('');
 
   const queryClient = useQueryClient();
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    console.dir(acceptedFiles);
-    console.log('onDrop files=', acceptedFiles);
+  const onDrop = (acceptedFiles: File[]) => {
+    setFiles(
+      acceptedFiles.map((file) =>
+        Object.assign(file, {
+          preview: URL.createObjectURL(file)
+        })
+      )
+    );
+  };
+
+  useEffect(() => {
+    // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
+    return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
   }, []);
 
   const accept: Accept = {
@@ -55,7 +66,6 @@ const TweetForm = ({ closeDialog }: Props) => {
       queryClient.invalidateQueries({
         queryKey: CACHE_KEY_TWEETS
       });
-      setTweet('');
     },
     onError: (err) => {
       toast.error(err.message, { id: TOAST_KEY_ANNOUNCE });
@@ -66,23 +76,22 @@ const TweetForm = ({ closeDialog }: Props) => {
     e.preventDefault();
 
     if (tweet.trim() || acceptedFiles.length !== 0) {
-      console.log('acceptedFiles=', acceptedFiles);
-
       const formData = new FormData();
       // Iterate over the acceptedFiles array and append each file to the FormData object
       acceptedFiles.forEach((file) => {
         formData.append('attachmentUrls', file, file.name);
       });
 
-      // clear field for next request
+      // clear fields
       acceptedFiles.length = 0;
+      setTweet('');
 
       formData.append('tweetContent', tweet);
 
       try {
-        console.log('formdata===', formData);
         mutation.mutate(formData);
         closeDialog && closeDialog();
+        setFiles([]);
       } catch (err: unknown) {
         if (err instanceof Error)
           toast.error(err.message, { id: TOAST_KEY_ANNOUNCE });
@@ -109,6 +118,19 @@ const TweetForm = ({ closeDialog }: Props) => {
           className="w-full border-none bg-transparent px-0 py-4 text-xl text-muted text-white caret-white"
           placeholder="What is happening?!"
         />
+
+        <div className="flex space-x-2">
+          {files.map((file, idx) => (
+            <Image
+              key={idx}
+              width={40}
+              height={40}
+              src={file.preview}
+              alt="image attachment"
+              className="rounded-md"
+            />
+          ))}
+        </div>
         <div className="flex justify-between">
           <div className="flex items-end gap-4">
             <div {...getRootProps()} className="flex items-center">
@@ -148,10 +170,6 @@ const TweetForm = ({ closeDialog }: Props) => {
             Post
           </Button>
         </div>
-
-        {acceptedFiles.length != 0 && (
-          <p className="text-xs">{acceptedFiles.length} image(s) selected</p>
-        )}
       </div>
     </form>
   );

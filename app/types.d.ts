@@ -159,10 +159,15 @@ type Bookmark = {
   updatedAt: string;
 };
 
+type FileWithPreview = File & {
+  preview: string;
+};
+
 export {
   Bookmark,
   Conversation,
   ConversationData,
+  FileWithPreview,
   Gif,
   GifFetchResponse,
   Like,
@@ -170,6 +175,7 @@ export {
   Message,
   MessageRequest,
   PaginatedMessage,
+  PaginatedTweets,
   PaginationQuery,
   Payload,
   Player,
@@ -178,6 +184,5 @@ export {
   Session,
   SocketPaylod,
   Tweet,
-  PaginatedTweets,
   TweetWithComment
 };
