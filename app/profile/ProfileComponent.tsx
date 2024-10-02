@@ -4,14 +4,14 @@ import { Button } from '@/components/ui/button';
 import { PLACEHOLDER_PROFILE_IMAGE } from '@/constants';
 import { useAddFriend, usePlayer } from '@/hooks';
 import { Camera, UserPlus } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import ModalImage from 'react-modal-image';
 
 import FriendSuggestions from './FriendSuggestions';
 import ImageUploadDialog from './ImageUploadDialog';
-import ProfileEditDialog from './ProfileEditDialog';
 import ProfileComponentSkeleton from './ProfileComponentSkeleton';
+import ProfileEditDialog from './ProfileEditDialog';
 
 type Props = {
   prop: {
@@ -34,20 +34,15 @@ const ProfileComponent = ({ prop, showImageDialog }: Props) => {
     <section className="grow px-24">
       <div className="relative">
         {user && (
-          <div className="relative h-96 w-full">
-            <Image
-              src={
-                user?.coverImage ? user.coverImage : PLACEHOLDER_PROFILE_IMAGE
-              }
-              alt="User cover photo"
-              sizes="300px"
-              fill
-              className="rounded-b-md"
-              style={{
-                objectFit: 'cover'
-              }}
-            />
-          </div>
+          <ModalImage
+            small={
+              user?.coverImage ? user.coverImage : PLACEHOLDER_PROFILE_IMAGE
+            }
+            large={
+              user?.coverImage ? user.coverImage : PLACEHOLDER_PROFILE_IMAGE
+            }
+            className="h-96 w-full rounded-b-md object-cover"
+          />
         )}
         <div className="absolute bottom-2 right-8">
           {showImageDialog && user && (
@@ -67,16 +62,19 @@ const ProfileComponent = ({ prop, showImageDialog }: Props) => {
       <div className="flex h-36 justify-between p-4">
         <div className="relative flex items-center gap-4">
           <div className="relative hidden self-end md:block lg:h-44 lg:w-44">
-            <Image
-              src={
+            <ModalImage
+              small={
                 user?.profileImage
                   ? user.profileImage
                   : PLACEHOLDER_PROFILE_IMAGE
               }
-              alt="User profile image"
-              fill
-              style={{ objectFit: 'cover' }}
-              className="rounded-full border-4 border-background"
+              large={
+                user?.profileImage
+                  ? user.profileImage
+                  : PLACEHOLDER_PROFILE_IMAGE
+              }
+              alt=""
+              className="size-44 rounded-[150%] border-4 border-background object-cover"
             />
           </div>
 
@@ -84,7 +82,7 @@ const ProfileComponent = ({ prop, showImageDialog }: Props) => {
             <p className="text-3xl font-semibold">{user?.username}</p>
             <p className="text-gray-400">{user?.friends?.length} friends</p>
           </div>
-          <div className="absolute bottom-2 left-32 border-0">
+          <div className="absolute bottom-2 left-32 hidden border-0 md:block">
             {showImageDialog && user && (
               <ImageUploadDialog
                 title="Drop/Upload profile picture"
