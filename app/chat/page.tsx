@@ -13,8 +13,6 @@ export default function Page() {
     return () => reset();
   }, [reset]);
 
-  console.log('mounted');
-
   return (
     <section className="flex grow items-center justify-center bg-background">
       <div className="flex flex-col items-center space-y-4">

@@ -24,9 +24,6 @@ type Props = {
 };
 
 const ImageUploadDialog = ({ title, type, userId, children }: Props) => {
-  console.log('mounted');
-  // const imageRef = useRef<HTMLInputElement>(null);
-
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
 
   const resourceName = type === 'profile' ? 'profileImage' : 'coverImage';

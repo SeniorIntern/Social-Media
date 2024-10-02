@@ -14,8 +14,6 @@ type Props = {
 const ConversationHeader = ({ userId }: Props) => {
   const conversation = useConversationStore((s) => s.conversation);
 
-  console.log('mounted');
-
   return (
     <div>
       {conversation && (
@@ -32,7 +30,7 @@ const ConversationHeader = ({ userId }: Props) => {
                   conversation.members.length > 2
                     ? PLACEHOLDER_PROFILE_IMAGE
                     : getConversationMember(conversation?.members, userId)
-                      ?.profileImage
+                        ?.profileImage
                 }
                 alt="profile image"
                 fill

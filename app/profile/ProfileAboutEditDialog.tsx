@@ -46,8 +46,6 @@ type Props = {
 };
 
 const ProfileAboutEditDialog = ({ about, id }: Props) => {
-  console.log('mounted');
-
   const [open, setOpen] = useState(false);
 
   const queryClient = useQueryClient();

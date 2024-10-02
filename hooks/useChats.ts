@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 const useChats = (id: string) => {
   return useQuery<Message[], Error>({
     queryKey: [CACHE_KEY_CHATS, id],
-    queryFn: () => chatService.getAllWithId(id),
+    queryFn: () => chatService.getAllWithId(id)
   });
 };
 

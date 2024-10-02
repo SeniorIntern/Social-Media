@@ -13,7 +13,7 @@ export default function Page() {
             style={{ objectFit: 'cover' }}
           />
         </div>
-        <p className="text-xl text-center font-bold text-gray-400">
+        <p className="text-center text-xl font-bold text-gray-400">
           Select people&apos;s names to preview their profile.
         </p>
       </div>

@@ -8,7 +8,7 @@ const Header = async () => {
   const userId = profileObject?.payload._id;
 
   return (
-    <nav className="flex h-[var(--bar-height)] items-center justify-between border-b bg-secondary py-2 px-8">
+    <nav className="flex h-[var(--bar-height)] items-center justify-between border-b bg-secondary px-8 py-2">
       <NavOptions />
       <UserNav>
         {userId ? (

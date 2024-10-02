@@ -17,8 +17,6 @@ type Prop = {
 };
 
 const SearchChat = ({ userId, conversations, setShowChats }: Prop) => {
-  console.log('mounted');
-
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [matchedConversations, setMatchedConversations] = useState<
     Conversation[]
@@ -38,7 +36,6 @@ const SearchChat = ({ userId, conversations, setShowChats }: Prop) => {
 
     if (matchingChats.length > 0) {
       setMatchedConversations(matchingChats);
-      console.log('Matching Groups:', matchingChats);
     } else {
       console.log('No matching chats found.');
     }

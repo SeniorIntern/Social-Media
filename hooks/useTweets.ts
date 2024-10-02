@@ -1,10 +1,7 @@
 import { PaginatedTweets } from '@/app/types';
 import { CACHE_KEY_TWEETS } from '@/constants';
 import { apiClient } from '@/services';
-import {
-  keepPreviousData,
-  useInfiniteQuery,
-} from '@tanstack/react-query';
+import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query';
 
 const useTweets = (limit: number) => {
   return useInfiniteQuery<PaginatedTweets, Error>({

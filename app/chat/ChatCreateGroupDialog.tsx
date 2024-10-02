@@ -37,7 +37,6 @@ const ChatCreateGroupDialog = ({ userId }: Props) => {
         </DialogHeader>
 
         <ChatCreateGroupForm closeDialog={closeDialog} userId={userId} />
-
       </DialogContent>
     </Dialog>
   );

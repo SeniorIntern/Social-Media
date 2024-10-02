@@ -13,7 +13,6 @@ type Props = {
 };
 
 const PeopleSuggestionItem = ({ user }: Props) => {
-  console.log('mounted');
   const mutation = useAddFriend();
 
   return (
@@ -21,9 +20,7 @@ const PeopleSuggestionItem = ({ user }: Props) => {
       <div className="relative h-36 w-full">
         <Image
           src={
-            user?.profileImage
-              ? user.profileImage
-              : PLACEHOLDER_PROFILE_IMAGE
+            user?.profileImage ? user.profileImage : PLACEHOLDER_PROFILE_IMAGE
           }
           alt="profile image"
           fill

@@ -23,7 +23,7 @@ const NavOptions = () => {
   ];
 
   return (
-    <div className=''>
+    <div className="">
       <div className="hidden items-center space-x-12 md:flex">
         <Link href="/">
           <span className="text-3xl font-extrabold">XC</span>
@@ -46,7 +46,7 @@ const NavOptions = () => {
           </SheetTrigger>
           <SheetContent>
             <SheetHeader>
-              <SheetTitle className="text-left mb-6">
+              <SheetTitle className="mb-6 text-left">
                 <Link href="/" className="text-3xl font-extrabold">
                   XC
                 </Link>

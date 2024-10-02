@@ -8,8 +8,8 @@ export default function filterPlayersByFriends(
   const friendIDs = friendsArray.map((friend) => friend._id);
 
   // Filter usersArray by checking if any user's _id matches a friend ID
-  const filteredUsers = usersArray.filter((user) =>
-    !friendIDs.includes(user._id)
+  const filteredUsers = usersArray.filter(
+    (user) => !friendIDs.includes(user._id)
   );
 
   return filteredUsers;

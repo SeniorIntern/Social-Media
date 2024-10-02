@@ -14,8 +14,6 @@ type Props = {
 const ProfileAbout = ({ user, hideDialog = false }: Props) => {
   const [showMore, setShowMore] = useState<boolean>(false);
 
-  console.log('mounted');
-
   return (
     <div className="w-full space-y-4 lg:w-[58%]">
       <div className="h-fit space-y-4 rounded-md bg-secondary p-4">

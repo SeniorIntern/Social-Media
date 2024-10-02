@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 const usePlayers = () => {
   return useQuery<Player[], Error>({
     queryKey: CACHE_KEY_PLAYERS,
-    queryFn: playerService.getAll,
+    queryFn: playerService.getAll
   });
 };
 

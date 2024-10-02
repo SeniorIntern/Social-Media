@@ -21,8 +21,6 @@ const UserInfo = ({ conversationId }: Props) => {
   if (isLoading) return <UserInfoSkeleton />;
   if (error) return <p>{error.message}</p>;
 
-  console.log('mounted');
-
   return (
     <div className="flex flex-col items-center space-y-4">
       {members && (

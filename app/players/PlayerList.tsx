@@ -8,13 +8,11 @@ import Link from 'next/link';
 import PlayerListSkeleton from './PlayerListSkeleton';
 
 const PlayerList = () => {
-  console.log('mounted');
-
   const { data: allPlayers, isLoading: isPlayersLoading, error } = usePlayers();
   const { data: friends, isLoading: isFriendsLoading } = useFriends();
   const mutation = useAddFriend();
 
-  if (isPlayersLoading || isFriendsLoading) return <PlayerListSkeleton/>
+  if (isPlayersLoading || isFriendsLoading) return <PlayerListSkeleton />;
 
   if (error) return <p>{error.message}</p>;
 

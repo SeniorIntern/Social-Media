@@ -21,7 +21,7 @@ export default async function PlayerLayout({
           <p className="text-xl font-extrabold">Suggestions</p>
         </div>
 
-        <p className='hidden md:block'>People you may know</p>
+        <p className="hidden md:block">People you may know</p>
         <PlayerList />
       </ScrollArea>
 

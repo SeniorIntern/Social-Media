@@ -12,8 +12,6 @@ type Props = {
 };
 
 const ProfileIntro = ({ user, hideDialog = false }: Props) => {
-  console.log('mounted');
-
   return (
     <div className="grow space-y-4">
       <div className="h-fit space-y-4 rounded-md bg-secondary p-4">

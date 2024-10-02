@@ -22,8 +22,6 @@ type CardSelection = {
 };
 
 const CardContainer = ({ gifs }: Props) => {
-  console.log('mounted');
-
   const totalUniqueCards = 9;
 
   const { width, height } = useWindowSize();

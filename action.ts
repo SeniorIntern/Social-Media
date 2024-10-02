@@ -36,8 +36,6 @@ export async function login(formData: LoginData) {
 
   try {
     const res = await apiClient.post('/auth', user);
-    console.log('res===', res.data);
-
     // @ts-ignore
     const payload = res.data;
 

@@ -9,8 +9,6 @@ type Props = {
 };
 
 export const ProfileTweets = ({ userId }: Props) => {
-  console.log('mounted');
-
   const { data: tweets, isLoading, error } = useUserTweets(userId);
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error.message}</p>;

@@ -11,8 +11,6 @@ import TweetPageSkeleton from './TweetPageSkeleton';
 import TweetsContainer from './TweetsContainer';
 
 export default function Page() {
-  console.log('mounted');
-
   const limit = 6;
   const { data, error, isLoading, hasNextPage, fetchNextPage } =
     useTweets(limit);

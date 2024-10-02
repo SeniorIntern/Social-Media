@@ -11,7 +11,7 @@ const TweetPageSkeleton = () => {
       className="flex grow flex-col space-y-8 overflow-auto p-2"
       id="tweetBox"
     >
-      <TweetFormSkeleton/>
+      <TweetFormSkeleton />
       <Separator />
 
       <section className="flex flex-col divide-y">

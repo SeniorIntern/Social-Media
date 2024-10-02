@@ -15,14 +15,12 @@ import SearchChat from './SearchChat';
 import UserListItem from './UserListItem';
 
 const ConversationList = ({ userId }: { userId: string }) => {
-  console.log('mounted');
-
   const [showChats, setShowChats] = useState(true);
   const { data: conversations, isLoading, error } = useConversations(userId);
 
   const { conversation, setConversation } = useConversationStore();
 
-  if (isLoading) return <ConversationListSkeleton />
+  if (isLoading) return <ConversationListSkeleton />;
 
   if (error) return <p>{error.message}</p>;
 

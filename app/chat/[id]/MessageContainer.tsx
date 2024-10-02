@@ -50,8 +50,6 @@ const MessageContainer = ({ sender, conversationId }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chats]);
 
-  console.log('mounted');
-
   if (isLoading) return <MessageContainerSkeleton />;
   if (error) return <p>{error.message}</p>;
   if (!data) return <p>Fetching...</p>;
@@ -89,7 +87,7 @@ const MessageContainer = ({ sender, conversationId }: Props) => {
                     <ModalImage
                       small={a}
                       large={a}
-                      alt=''
+                      alt=""
                       className="rounded-md object-cover"
                     />
                   </div>

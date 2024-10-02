@@ -22,8 +22,6 @@ type Props = {
 };
 
 const ProfileEditDialog = ({ user }: Props) => {
-  console.log('mounted');
-
   return (
     <Dialog>
       <DialogTrigger asChild>

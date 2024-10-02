@@ -11,8 +11,6 @@ type Props = {
 };
 
 const UserListItem = ({ userData, children }: Props) => {
-  console.log('mounted');
-
   const profileImage = getProfileImage(userData);
 
   return (
@@ -32,7 +30,7 @@ const UserListItem = ({ userData, children }: Props) => {
             {userData.data.isGroup
               ? userData.data.groupInfo?.groupName
               : getConversationMember(userData.data.members, userData.userId)
-                .username}
+                  .username}
           </p>
         )}
 
