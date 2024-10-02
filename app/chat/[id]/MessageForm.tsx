@@ -59,11 +59,6 @@ const MessageForm = ({ conversationId, sender }: Props) => {
         },
         updatedAt: Date.now()
       });
-
-      if (!messageRef.current?.value.trim()) {
-        return;
-      }
-      messageRef.current.value = '';
     },
     onError: (err) => {
       toast.error(err.message, { id: TOAST_KEY_ANNOUNCE });
@@ -93,7 +88,7 @@ const MessageForm = ({ conversationId, sender }: Props) => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (messageRef.current?.value.trim() || acceptedFiles.length !== 0) {
+    if (messageRef.current?.value.trim() || acceptedFiles.length) {
       const formData = new FormData();
       // Iterate over the acceptedFiles array and append each file to the FormData object
       acceptedFiles.forEach((file) => {
@@ -109,8 +104,13 @@ const MessageForm = ({ conversationId, sender }: Props) => {
       }
 
       try {
-        mutation.mutate(formData);
+        // clear fields
+        if (messageRef.current?.value) {
+          messageRef.current.value = '';
+        }
         setFiles([]);
+
+        mutation.mutate(formData);
       } catch (err: unknown) {
         if (err instanceof Error)
           toast.error(err.message, { id: TOAST_KEY_ANNOUNCE });
@@ -124,8 +124,8 @@ const MessageForm = ({ conversationId, sender }: Props) => {
   }, [files]);
 
   return (
-    <div className="mt-auto flex max-h-fit grow flex-col bg-green-600 py-2">
-      <div className="mb-1 flex space-x-2 px-2">
+    <div className="relative mt-auto flex max-h-fit grow flex-col px-1 py-2">
+      <div className="absolute -top-[105%] flex space-x-2 bg-secondary px-2">
         {files.map((file, idx) => (
           <Image
             key={idx}
