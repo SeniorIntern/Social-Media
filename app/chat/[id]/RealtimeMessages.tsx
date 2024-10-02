@@ -1,6 +1,6 @@
 import { SocketPaylod } from '@/app/types';
 import { cn } from '@/lib/utils';
-import Image from 'next/image';
+import ModalImage from 'react-modal-image';
 import { format } from 'timeago.js';
 
 type Props = {
@@ -15,7 +15,7 @@ export const RealtimeMessages = ({ chats, sender }: Props) => {
         <div
           key={index}
           className={cn(
-            'flex flex-col items-start space-y-2',
+            'my-1 flex flex-col items-start space-y-2',
             message.sender == sender && 'items-end'
           )}
         >
@@ -23,22 +23,23 @@ export const RealtimeMessages = ({ chats, sender }: Props) => {
             <div className="flex flex-col gap-2">
               {message.attachmentUrls.map((a, i) => (
                 <div key={i} className="relative h-36 w-36">
-                  <Image
-                    src={a}
-                    alt="message attachment image"
-                    fill
-                    style={{ objectFit: 'cover' }}
-                    className="rounded-md"
+                  <ModalImage
+                    small={a}
+                    large={a}
+                    alt=""
+                    className="rounded-md object-cover"
                   />
                 </div>
               ))}
             </div>
           )}
+
           {message.text && (
             <p className="w-fit rounded-2xl bg-primary px-4 py-1">
               {message.text}
             </p>
           )}
+
           <p className="text-sm text-gray-400">{format(message.updatedAt)}</p>
         </div>
       ))}

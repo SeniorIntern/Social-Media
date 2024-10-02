@@ -37,13 +37,6 @@ type Session = {
   expires: number;
 };
 
-type Member = {
-  _id: string;
-  username: string;
-  email: string;
-  profileImage: string;
-};
-
 type Conversation = {
   _id: string;
   members: Member[];
@@ -62,6 +55,13 @@ type PlayerIntro = {
   study: string;
   location: string;
   job: string;
+};
+
+type Member = {
+  _id: string;
+  username: string;
+  email: string;
+  profileImage: string;
 };
 
 type Player = {

@@ -76,12 +76,12 @@ const MessageContainer = ({ sender, conversationId }: Props) => {
           <div
             key={message._id}
             className={cn(
-              'flex flex-col items-start space-y-2',
+              'flex flex-col items-start',
               message.sender == sender && 'items-end'
             )}
           >
             {message.attachmentUrls.length !== 0 && (
-              <div className="flex cursor-pointer flex-col gap-2">
+              <div className="my-1 flex cursor-pointer flex-col gap-2 space-y-2">
                 {message.attachmentUrls.map((a, i) => (
                   <div key={i} className="relative h-36 w-36">
                     <ModalImage

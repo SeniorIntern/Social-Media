@@ -7,18 +7,19 @@ import MessageForm from './MessageForm';
 import UserInfo from './UserInfo';
 
 export default async function Page({ params }: { params: { id: string } }) {
+  const conversationId = params.id;
+
   const profileObject = await getSession();
   if (!profileObject) redirect('/login');
 
   return (
     <>
       <section className="flex grow flex-col">
-        <ConversationHeader userId={profileObject?.payload._id} />
+        <ConversationHeader conversationId={conversationId} />
         <MessageContainer
           sender={profileObject?.payload._id}
-          conversationId={params.id}
+          conversationId={conversationId}
         />
-
         <MessageForm
           sender={profileObject?.payload._id}
           conversationId={params.id}

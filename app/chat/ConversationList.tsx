@@ -77,7 +77,7 @@ const ConversationList = ({ userId }: { userId: string }) => {
                   >
                     <p className="hidden text-sm text-mutedtext lg:block">
                       <span>{c.lastSender == userId && 'You: '}</span>
-                      {c.lastMessage}
+                      {c.lastMessage?.substring(0, 12) + '...'}
                     </p>
                   </UserListItem>
                 </Link>
