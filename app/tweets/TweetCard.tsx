@@ -8,6 +8,7 @@ import { Bookmark, Heart, Repeat2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import ModalImage from 'react-modal-image';
 import { format } from 'timeago.js';
 
 import TweetCommentDialog from './TweetCommentDialog';
@@ -72,12 +73,11 @@ const TweetCard = ({ tweet }: Props) => {
           {tweet.attachmentUrls.length > 0 &&
             tweet.attachmentUrls.map((attachment, index) => (
               <div key={index} className="relative h-60 w-full">
-                <Image
-                  src={attachment}
-                  alt="Tweet attachment"
-                  fill
-                  style={{ objectFit: 'cover' }}
-                  className="rounded-md"
+                <ModalImage
+                  small={attachment}
+                  large={attachment}
+                  alt=""
+                  className="h-60 w-full rounded-md object-cover"
                 />
               </div>
             ))}

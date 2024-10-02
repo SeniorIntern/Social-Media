@@ -5,11 +5,10 @@ import { SocketPaylod } from '@/app/types';
 import Spinner from '@/components/reusables/Spinner';
 import useMessages from '@/hooks/useMessages';
 import { cn } from '@/lib/utils';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import ModalImage from 'react-modal-image';
 import { format } from 'timeago.js';
-
 import MessageContainerSkeleton from './MessageContainerSkeleton';
 import { RealtimeMessages } from './RealtimeMessages';
 
@@ -87,12 +86,11 @@ const MessageContainer = ({ sender, conversationId }: Props) => {
               <div className="flex cursor-pointer flex-col gap-2">
                 {message.attachmentUrls.map((a, i) => (
                   <div key={i} className="relative h-36 w-36">
-                    <Image
-                      src={a}
-                      alt="message attachment image"
-                      fill
-                      style={{ objectFit: 'cover' }}
-                      className="rounded-md"
+                    <ModalImage
+                      small={a}
+                      large={a}
+                      alt=''
+                      className="rounded-md object-cover"
                     />
                   </div>
                 ))}
