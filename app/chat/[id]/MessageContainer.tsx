@@ -10,8 +10,8 @@ import { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { format } from 'timeago.js';
 
-import { RealtimeMessages } from './RealtimeMessages';
 import MessageContainerSkeleton from './MessageContainerSkeleton';
+import { RealtimeMessages } from './RealtimeMessages';
 
 type Props = {
   sender: string;

@@ -19,15 +19,13 @@ export default async function Page({ params }: { params: { id: string } }) {
           conversationId={params.id}
         />
 
-        <div className="mt-auto flex h-[var(--bar-height)] items-center space-x-2 px-2 py-4">
-          <MessageForm
-            sender={profileObject?.payload._id}
-            conversationId={params.id}
-          />
-        </div>
+        <MessageForm
+          sender={profileObject?.payload._id}
+          conversationId={params.id}
+        />
       </section>
 
-      <section className="w-[24%] hidden md:block space-y-4 p-4">
+      <section className="hidden w-[24%] space-y-4 p-4 md:block">
         <UserInfo conversationId={params.id} />
       </section>
     </>

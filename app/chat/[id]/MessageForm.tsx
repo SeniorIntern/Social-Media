@@ -20,7 +20,8 @@ import apiClient from '@/services/apiClient';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import EmojiPicker from 'emoji-picker-react';
 import { Image as Img, SendHorizontal, SmilePlus } from 'lucide-react';
-import { FormEvent, useCallback, useRef } from 'react';
+import Image from 'next/image';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import { Accept, useDropzone } from 'react-dropzone';
 import { toast } from 'sonner';
 
@@ -29,7 +30,13 @@ type Props = {
   conversationId: string;
 };
 
+type FileWithPreview = File & {
+  preview: string;
+};
+
 const MessageForm = ({ conversationId, sender }: Props) => {
+  const [files, setFiles] = useState<FileWithPreview[]>([]);
+
   const { socket } = useSocket();
   const messageRef = useRef<HTMLInputElement>(null);
 
@@ -67,10 +74,15 @@ const MessageForm = ({ conversationId, sender }: Props) => {
     }
   });
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    console.dir(acceptedFiles);
-    console.log('onDrop files=', acceptedFiles);
-  }, []);
+  const onDrop = (acceptedFiles: File[]) => {
+    setFiles(
+      acceptedFiles.map((file) =>
+        Object.assign(file, {
+          preview: URL.createObjectURL(file)
+        })
+      )
+    );
+  };
 
   const accept: Accept = {
     'image/png': [],
@@ -105,6 +117,7 @@ const MessageForm = ({ conversationId, sender }: Props) => {
       try {
         console.log('formdata===', formData);
         mutation.mutate(formData);
+        setFiles([]);
       } catch (err: unknown) {
         if (err instanceof Error)
           toast.error(err.message, { id: TOAST_KEY_ANNOUNCE });
@@ -112,17 +125,27 @@ const MessageForm = ({ conversationId, sender }: Props) => {
     }
   };
 
-  console.log('mounted');
+  useEffect(() => {
+    // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
+    return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
+  }, [files]);
 
   return (
-    <div className="flex grow flex-col">
-      <form
-        className="flex grow items-center space-x-4"
-        onSubmit={handleSubmit}
-      >
-        {acceptedFiles.length != 0 && (
-          <span className="text-xs">{acceptedFiles.length} image(s)</span>
-        )}
+    <div className="mt-auto flex max-h-fit grow flex-col bg-green-600 py-2">
+      <div className="mb-1 flex space-x-2 px-2">
+        {files.map((file, idx) => (
+          <Image
+            key={idx}
+            width={40}
+            height={40}
+            src={file.preview}
+            alt="image attachment"
+            className="rounded-md"
+          />
+        ))}
+      </div>
+
+      <form className="flex items-center space-x-4" onSubmit={handleSubmit}>
         <div {...getRootProps()} className="flex items-center">
           <input
             {...getInputProps()}
